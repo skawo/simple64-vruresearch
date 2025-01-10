@@ -152,6 +152,15 @@ static void process_vru_command(void* jbd,
         if (cont->load_offset > 0)
         {
             uint8_t offset = 0;
+            
+            while (offset < 40)
+            {
+                DebugMessage(M64MSG_WARNING, "Offs at %d", cont->word[offset]);
+                offset++;
+            }
+            
+            offset = 0;
+            
             while (cont->word[offset] == 0 && offset < 40)
                 ++offset;
             if (offset == 40)
@@ -160,8 +169,6 @@ static void process_vru_command(void* jbd,
             }
             else if (cont->word[offset] == 3)
             {
-                DebugMessage(M64MSG_WARNING, "Offs at %d", offset);
-                
                 offset += 3;
                 uint16_t length = cont->word[offset];
                 if (ROM_HEADER.Country_code == 0x4A /* Japan */ || ROM_HEADER.Country_code == 0x00 /* Demo */)
