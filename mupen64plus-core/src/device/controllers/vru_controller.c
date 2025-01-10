@@ -145,6 +145,10 @@ static void process_vru_command(void* jbd,
     } break;
 
     case JCMD_VRU_READ_STATUS: {
+        
+        DebugMessage(M64MSG_WARNING, "Command %02x %02x %02x, %x, %x", *tx, *rx, cmd, *tx_buf, *rx_buf);
+        
+
         JOYBUS_CHECK_COMMAND_FORMAT(3, 3)
         rx_buf[0] = cont->voice_init ? cont->voice_state : 0;
         rx_buf[1] = 0;
