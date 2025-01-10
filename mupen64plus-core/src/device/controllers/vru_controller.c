@@ -155,7 +155,7 @@ static void process_vru_command(void* jbd,
             
             while (offset < 40)
             {
-                DebugMessage(M64MSG_WARNING, "Offs at %d", cont->word[offset]);
+                DebugMessage(M64MSG_WARNING, "Offs at %x", cont->word[offset]);
                 offset++;
             }
             
