@@ -145,10 +145,6 @@ static void process_vru_command(void* jbd,
     } break;
 
     case JCMD_VRU_READ_STATUS: {
-        
-        DebugMessage(M64MSG_WARNING, "Command %02x %02x %02x, %x, %x", *tx, *rx, cmd, *tx_buf, *rx_buf);
-        
-
         JOYBUS_CHECK_COMMAND_FORMAT(3, 3)
         rx_buf[0] = cont->voice_init ? cont->voice_state : 0;
         rx_buf[1] = 0;
@@ -156,7 +152,6 @@ static void process_vru_command(void* jbd,
         if (cont->load_offset > 0)
         {
             uint8_t offset = 0;
-                       
             while (cont->word[offset] == 0 && offset < 40)
                 ++offset;
             if (offset == 40)
@@ -167,9 +162,6 @@ static void process_vru_command(void* jbd,
             {
                 offset += 3;
                 uint16_t length = cont->word[offset];
-                
-                DebugMessage(M64MSG_WARNING, "Length %x", length);
-                
                 if (ROM_HEADER.Country_code == 0x4A /* Japan */ || ROM_HEADER.Country_code == 0x00 /* Demo */)
                 {
                     offset -= 1;
@@ -249,7 +241,8 @@ static void process_vru_command(void* jbd,
     } break;
 
     default:
-        //DebugMessage(M64MSG_WARNING, "cont: Unknown command %02x %02x %02x", *tx, *rx, cmd);
+        DebugMessage(M64MSG_WARNING, "cont: Unknown command %02x %02x %02x",
+            *tx, *rx, cmd);
     }
 }
 

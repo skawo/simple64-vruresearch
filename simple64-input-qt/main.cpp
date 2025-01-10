@@ -365,8 +365,6 @@ EXPORT void CALL SendVRUWord(uint16_t length, uint16_t *word, uint8_t lang)
         {
             words.append(encoded_string.toLower());
             word_indexes.append(word_list_count);
-            
-            DebugMessage(M64MSG_ERROR, "Registered word: %s", encoded_string.toLower());
         }
     }
     else
