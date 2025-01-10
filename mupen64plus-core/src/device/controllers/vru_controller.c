@@ -160,6 +160,8 @@ static void process_vru_command(void* jbd,
             }
             else if (cont->word[offset] == 3)
             {
+                DebugMessage(M64MSG_WARNING, "Offs at %d", offset);
+                
                 offset += 3;
                 uint16_t length = cont->word[offset];
                 if (ROM_HEADER.Country_code == 0x4A /* Japan */ || ROM_HEADER.Country_code == 0x00 /* Demo */)
@@ -241,8 +243,7 @@ static void process_vru_command(void* jbd,
     } break;
 
     default:
-        DebugMessage(M64MSG_WARNING, "cont: Unknown command %02x %02x %02x",
-            *tx, *rx, cmd);
+        //DebugMessage(M64MSG_WARNING, "cont: Unknown command %02x %02x %02x", *tx, *rx, cmd);
     }
 }
 
