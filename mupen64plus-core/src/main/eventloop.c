@@ -548,18 +548,18 @@ static int get_saveslot_from_keysym(int keysym)
 
 void event_sdl_keydown(int keysym, int keymod)
 {
-    
-    if (keysym == SDL_SCANCODE_UP && keymod & (SDL_SCANCODE_LCTRL | SDL_SCANCODE_RCTRL))
-        main_biopak_bpmup(); 
-    if (keysym == SDL_SCANCODE_DOWN && keymod & (SDL_SCANCODE_LCTRL | SDL_SCANCODE_RCTRL))
-        main_biopak_bpmdown();      
+     
     
 #ifndef NO_KEYBINDINGS
     int slot;
 
     /* check for the only hard-coded key command: Alt-enter for fullscreen */
     if (keysym == SDL_SCANCODE_RETURN && keymod & (KMOD_LALT | KMOD_RALT))
-        gfx.changeWindow();   
+        gfx.changeWindow();  
+    if (keysym == SDL_SCANCODE_UP && keymod & (SDL_SCANCODE_LCTRL | SDL_SCANCODE_RCTRL))
+        main_biopak_bpmup(); 
+    if (keysym == SDL_SCANCODE_DOWN && keymod & (SDL_SCANCODE_LCTRL | SDL_SCANCODE_RCTRL))
+        main_biopak_bpmdown();       
     /* check all of the configurable commands */
     else if ((slot = get_saveslot_from_keysym(keysym)) >= 0)
         main_state_set_slot(slot);

@@ -651,16 +651,18 @@ void main_state_inc_slot(void)
 
 void main_biopak_bpmup(void)
 {
-    DebugMessage(M64MSG_INFO, "up?"); 
-    
     for (int i = 0; i < GAME_CONTROLLERS_COUNT; ++i) 
     {
-        for(int k = 0; k < PAK_MAX_SIZE; ++k) 
+        if (Controls[i].Plugin == PLUGIN_BIO_PAK)
         {
-            if (l_ipaks[k] == &g_ibiopak) 
+        
+            for(int k = 0; k < PAK_MAX_SIZE; ++k) 
             {
-                init_biopak(&g_dev.biopaks[i], g_dev.biopaks[i].bpm + 1);
-                DebugMessage(M64MSG_INFO, "Biopak BPM: %d", g_dev.biopaks[i].bpm); 
+                if (l_ipaks[k] == &g_ibiopak) 
+                {
+                    init_biopak(&g_dev.biopaks[i], g_dev.biopaks[i].bpm + 1);
+                    DebugMessage(M64MSG_INFO, "Biopak BPM: %d", g_dev.biopaks[i].bpm); 
+                }
             }
         }
     }
@@ -668,16 +670,20 @@ void main_biopak_bpmup(void)
 
 void main_biopak_bpmdown(void)
 {
-    DebugMessage(M64MSG_INFO, "down?"); 
-    
     for (int i = 0; i < GAME_CONTROLLERS_COUNT; ++i) 
     {
         for(int k = 0; k < PAK_MAX_SIZE; ++k) 
         {
-            if (l_ipaks[k] == &g_ibiopak) 
+            if (Controls[i].Plugin == PLUGIN_BIO_PAK)
             {
-                init_biopak(&g_dev.biopaks[i], g_dev.biopaks[i].bpm - 1);
-                DebugMessage(M64MSG_INFO, "Biopak BPM: %d", g_dev.biopaks[i].bpm); 
+                if (l_ipaks[k] == &g_ibiopak) 
+                {
+                    if (g_dev.biopaks[i].bpm - 1 > 0)
+                    {
+                        init_biopak(&g_dev.biopaks[i], g_dev.biopaks[i].bpm - 1);
+                        DebugMessage(M64MSG_INFO, "Biopak BPM: %d", g_dev.biopaks[i].bpm); 
+                    }
+                }
             }
         }
     }
