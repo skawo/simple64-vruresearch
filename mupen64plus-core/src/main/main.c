@@ -651,9 +651,9 @@ void main_state_inc_slot(void)
 
 void main_biopak_bpmup(void)
 {
-    for (i = 0; i < GAME_CONTROLLERS_COUNT; ++i) 
+    for (int i = 0; i < GAME_CONTROLLERS_COUNT; ++i) 
     {
-        for(k = 0; k < PAK_MAX_SIZE; ++k) 
+        for(int k = 0; k < PAK_MAX_SIZE; ++k) 
         {
             if (l_ipaks[k] == &g_ibiopak) 
             {
@@ -666,9 +666,9 @@ void main_biopak_bpmup(void)
 
 void main_biopak_bpmdown(void)
 {
-    for (i = 0; i < GAME_CONTROLLERS_COUNT; ++i) 
+    for (int i = 0; i < GAME_CONTROLLERS_COUNT; ++i) 
     {
-        for(k = 0; k < PAK_MAX_SIZE; ++k) 
+        for(int k = 0; k < PAK_MAX_SIZE; ++k) 
         {
             if (l_ipaks[k] == &g_ibiopak) 
             {

@@ -86,6 +86,8 @@ void main_state_set_slot(int slot);
 void main_state_inc_slot(void);
 void main_state_load(const char *filename);
 void main_state_save(int format, const char *filename);
+void main_biopak_bpmdown(void);
+void main_biopak_bpmup(void);
 
 m64p_error main_core_state_query(m64p_core_param param, int *rval);
 m64p_error main_core_state_set(m64p_core_param param, int val);
