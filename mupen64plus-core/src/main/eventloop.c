@@ -549,9 +549,9 @@ static int get_saveslot_from_keysym(int keysym)
 void event_sdl_keydown(int keysym, int keymod)
 {
     
-    if (keysym == SDL_SCANCODE_RETURN && keymod & (SDL_SCANCODE_LCTRL | SDL_SCANCODE_UP))
+    if (keysym == SDL_SCANCODE_UP && keymod & (SDL_SCANCODE_LCTRL | SDL_SCANCODE_RCTRL))
         main_biopak_bpmup(); 
-    if (keysym == SDL_SCANCODE_RETURN && keymod & (SDL_SCANCODE_LCTRL | SDL_SCANCODE_DOWN))
+    if (keysym == SDL_SCANCODE_UP && keymod & (SDL_SCANCODE_LCTRL | SDL_SCANCODE_RCTRL))
         main_biopak_bpmdown();      
     
 #ifndef NO_KEYBINDINGS
