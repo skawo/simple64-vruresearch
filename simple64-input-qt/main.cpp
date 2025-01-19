@@ -686,6 +686,8 @@ void setPak(int Control)
     QString pak = gameControllerSettings->value("Controller" + QString::number(Control + 1) + "/Pak").toString();
     if (controller[Control].control->Type == CONT_TYPE_VRU)
         controller[Control].control->Plugin = PLUGIN_NONE;
+    else if (pak == "BioPak")
+        controller[Control].control->Plugin = PLUGIN_BIO_PAK;    
     else if (pak == "Transfer")
         controller[Control].control->Plugin = PLUGIN_TRANSFER_PAK;
     else if (pak == "Rumble")

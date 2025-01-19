@@ -122,6 +122,7 @@ ControllerTab::ControllerTab(unsigned int controller, QSettings* settings, QSett
     pakSelect->addItem("Memory");
     pakSelect->addItem("Rumble");
     pakSelect->addItem("Transfer");
+    pakSelect->addItem("BioPak");
     pakSelect->addItem("None");
     pakSelect->setCurrentText(controllerSettings->value("Controller" + QString::number(controller) + "/Pak").toString());
     connect(pakSelect, &QComboBox::currentTextChanged, [=](QString text) {
