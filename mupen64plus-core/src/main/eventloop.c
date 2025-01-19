@@ -551,7 +551,7 @@ void event_sdl_keydown(int keysym, int keymod)
     
     if (keysym == SDL_SCANCODE_UP && keymod & (SDL_SCANCODE_LCTRL | SDL_SCANCODE_RCTRL))
         main_biopak_bpmup(); 
-    if (keysym == SDL_SCANCODE_UP && keymod & (SDL_SCANCODE_LCTRL | SDL_SCANCODE_RCTRL))
+    if (keysym == SDL_SCANCODE_DOWN && keymod & (SDL_SCANCODE_LCTRL | SDL_SCANCODE_RCTRL))
         main_biopak_bpmdown();      
     
 #ifndef NO_KEYBINDINGS
