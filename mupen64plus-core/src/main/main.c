@@ -672,7 +672,7 @@ void main_biopak_bpmdown(void)
         {
             if (l_ipaks[k] == &g_ibiopak) 
             {
-                init_biopak(&g_dev.biopaks[i], &g_dev.biopaks[i].bpm - 1);
+                init_biopak(&g_dev.biopaks[i], g_dev.biopaks[i].bpm - 1);
                 DebugMessage(M64MSG_INFO, "Biopak BPM: %d", g_dev.biopaks[i].bpm); 
             }
         }
