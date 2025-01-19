@@ -651,6 +651,8 @@ void main_state_inc_slot(void)
 
 void main_biopak_bpmup(void)
 {
+    DebugMessage(M64MSG_INFO, "up?"); 
+    
     for (int i = 0; i < GAME_CONTROLLERS_COUNT; ++i) 
     {
         for(int k = 0; k < PAK_MAX_SIZE; ++k) 
@@ -666,6 +668,8 @@ void main_biopak_bpmup(void)
 
 void main_biopak_bpmdown(void)
 {
+    DebugMessage(M64MSG_INFO, "down?"); 
+    
     for (int i = 0; i < GAME_CONTROLLERS_COUNT; ++i) 
     {
         for(int k = 0; k < PAK_MAX_SIZE; ++k) 
