@@ -217,9 +217,9 @@ m64p_error open_rom(const unsigned char* romimage, unsigned int size)
         ROM_SETTINGS.status = 0;
         ROM_SETTINGS.players = 4;
         ROM_SETTINGS.rumble = 1;
-        ROM_SETTINGS.transferpak = 0;
+        ROM_SETTINGS.transferpak = 1;
         ROM_SETTINGS.mempak = 1;
-        ROM_SETTINGS.biopak = 0;
+        ROM_SETTINGS.biopak = 1;
         ROM_SETTINGS.disableextramem = DEFAULT_DISABLE_EXTRA_MEM;
         ROM_PARAMS.cheats = NULL;
 
