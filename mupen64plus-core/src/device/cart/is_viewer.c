@@ -37,3 +37,53 @@ void poweron_is_viewer(struct is_viewer* is_viewer)
     memset(is_viewer->output_buffer, 0, IS_BUFFER_SIZE);
     is_viewer->buffer_pos = 0;
 }
+
+void read_is_viewer(void* opaque, uint32_t address, uint32_t* value)
+{
+    struct is_viewer* is_viewer = (struct is_viewer*)opaque;
+    address &= IS_ADDR_MASK;
+    memcpy(value, &is_viewer->data[address], 4);
+    *value = big32(*value);
+}
+
+void write_is_viewer(void* opaque, uint32_t address, uint32_t value, uint32_t mask)
+{
+    struct is_viewer* is_viewer = (struct is_viewer*)opaque;
+    address &= IS_ADDR_MASK;
+    uint32_t word = value & mask;
+    if (address == 0x14)
+    {
+        if (word > 0)
+        {
+            /* make sure we don't overflow the buffer */
+            if (is_viewer->buffer_pos + word > IS_BUFFER_SIZE)
+            {
+                /* reset buffer */
+                memset(is_viewer->output_buffer, 0, IS_BUFFER_SIZE);
+                is_viewer->buffer_pos = 0;
+                DebugMessage(M64MSG_WARNING, "IS64: prevented buffer overflow, cleared buffer");
+                return;
+            }
+
+            memcpy(&is_viewer->output_buffer[is_viewer->buffer_pos], &is_viewer->data[0x20], word);
+            is_viewer->buffer_pos += word;
+
+            /* process new lines in buffer to prevent empty debug messages without losing data */
+            char* newline = memchr(is_viewer->output_buffer, '\n', is_viewer->buffer_pos);
+            while (newline)
+            {
+                size_t index = (newline - is_viewer->output_buffer) + 1;
+                *newline = '\0';
+                DebugMessage(M64MSG_INFO, "IS64: %s", is_viewer->output_buffer);
+                memcpy(&is_viewer->output_buffer, &is_viewer->output_buffer[index], IS_BUFFER_SIZE - index);
+                is_viewer->buffer_pos -= index;
+                newline = memchr(is_viewer->output_buffer, '\n', is_viewer->buffer_pos);
+            }
+        }
+    }
+    else
+    {
+        word = big32(word);
+        memcpy(&is_viewer->data[address], &word, sizeof(word));
+    }
+}
